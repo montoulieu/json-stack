@@ -1,28 +1,50 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <main-nav/>
+    <stack-organizer
+      class="py-3"
+      :stackData="stackData"
+      :stackOpen="stackOpen"
+    />
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import MainNav from './components/MainNav'
+import StackOrganizer from './components/StackOrganizer'
+import sampleData from './json/dummy-data'
 
 export default {
   name: 'app',
   components: {
-    HelloWorld
+    MainNav,
+    StackOrganizer
+  },
+  computed: {
+    stackData () {
+      return this.$store.state.stackData
+    },
+    stackOpen () {
+      return this.$store.state.stackOpen
+    }
+  },
+  methods: {
+    // loadData: function (data) {
+    //   this.loadedStack = data
+    // },
+  },
+  mounted() {
+    this.$store.commit('loadStackData', sampleData)
   }
 }
 </script>
 
 <style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+body {
+  font-weight: 300 !important;
+}
+
+.container {
+  min-width: 1400px;
 }
 </style>
