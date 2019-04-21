@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" :class="{ 'stack-open': stackOpen }">
     <main-nav/>
     <stack-organizer
       class="py-3"
@@ -39,12 +39,27 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
+@import url('https://fonts.googleapis.com/css?family=IBM+Plex+Mono:300,400,500,700');
+
 body {
   font-weight: 300 !important;
+  font-family: 'IBM Plex Mono', sans-serif !important;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#app {
+  width: 100%;
+
+  &.stack-open {
+    margin-top: 56px;
+  }
 }
 
 .container {
-  min-width: 1400px;
+  max-width: 1400px !important;
 }
 </style>

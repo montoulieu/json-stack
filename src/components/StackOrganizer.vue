@@ -2,13 +2,14 @@
   <div class="stack-organizer container">
     <stack-collection
       :stackData="stackData"
-      v-bind:class="{ open: $store.state.stackOpen }"
+      @click.native="openStack"
+      :class="{ open: $store.state.stackOpen }"
     />
   </div>
 </template>
 
 <script>
-import { Draggable } from '@shopify/draggable'
+import { Sortable } from '@shopify/draggable'
 import StackCollection from './stacks/StackCollection'
 
 export default {
@@ -21,18 +22,26 @@ export default {
     'stackOpen': Boolean,
   },
   methods: {
+    openStack: function () {
+      if(!this.$store.state.stackOpen)
+        this.$store.commit('stackToggleView')
+    }
   },
   mounted() {
-    const draggable = new Draggable(document.querySelectorAll('.stack-collection'), {
+    // eslint-disable-next-line
+    const sortable = new Sortable(document.querySelectorAll('.stack-collection'), {
       draggable: '.stack-card',
-      delay: 200
+      delay: 200,
+      mirror: {
+        constrainDimensions: true,
+      }
     })
   }
 }
 </script>
 
 <style lang="scss">
-  .stack-organizer {
+.stack-organizer {
 
-  }
+}
 </style>

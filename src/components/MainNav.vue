@@ -1,7 +1,7 @@
 <template>
-  <b-navbar toggleable="lg" type="light" variant="light">
+  <b-navbar toggleable="lg" type="dark" variant="transparent" fixed="top">
     <div class="container">
-      <b-navbar-brand href="#">JSON Stacks</b-navbar-brand>
+      <b-navbar-brand href="#">JSON Stack</b-navbar-brand>
       <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
       <b-collapse id="nav-collapse" is-nav>
@@ -39,7 +39,6 @@ export default {
       this.file = e.target.files[0]
     },
     onReaderLoad: function (e) {
-        console.log(e.target.result);
         this.$store.commit('loadStackData', e.target.result)
     },
     ...mapMutations([
